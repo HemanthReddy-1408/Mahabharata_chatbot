@@ -1,0 +1,8 @@
+__pycache__/
+.env
+.llm_cache.db
+chat_history_*.json
+*.pyc
+*.pkl
+*.DS_Store
+code.ipynb
