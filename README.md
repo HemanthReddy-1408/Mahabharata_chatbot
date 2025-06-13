@@ -1,118 +1,135 @@
+
 # Mahabharata RAG QA System
 
-This project implements a Retrieval-Augmented Generation (RAG) pipeline that uses the Mahabharata and related texts as a knowledge base. It is designed to provide deep, contextual, and spiritual answers to life questions. The pipeline uses local language models via Ollama, FAISS for vector search, and LangChain for orchestration.
+This project implements a **Retrieval-Augmented Generation (RAG)** pipeline using the Mahabharata epic as the core knowledge source. It leverages local language models (via Ollama), vector search (via FAISS), and orchestration with LangChain to create a robust Question-Answering system.
 
 ---
 
-## Project Structure
+## 📁 Project Structure
 
+```
 .
-├── .cache/ # LangChain cache
-│ └── langchain_cache.db
+├── .cache/
+│   └── langchain_cache.db              # LangChain's local cache DB
 
-├── data/ # Core data assets
-│ ├── Mahabharata_Unabridged.pdf # Primary knowledge source
-│ ├── maha_chunks.json # Text split into vector-searchable chunks
-│ ├── maha_chunks_metadata.json # Metadata for chunk provenance
-│ ├── maha_faiss.index # Vector index (FAISS)
+├── data/
+│   ├── Mahabharata_Unabridged.pdf      # Complete Mahabharata source
+│   ├── maha_chunks.json                # Processed chunks for embedding
+│   ├── maha_chunks_metadata.json       # Metadata for provenance/source tracking
+│   ├── maha_faiss.index                # FAISS vector index file
 
 ├── llms/
-│ └── ollama_llm.py # Local LLM wrapper using LangChain and Ollama
+│   └── ollama_llm.py                   # Wrapper for LangChain LLM interface using Ollama
 
 ├── path_to_cache_file/
-│ └── langchain_cache.db # LangChain cache duplicate (optional)
+│   └── langchain_cache.db              # Reference to LangChain cache path
 
 ├── utils/
-│ ├── rag_helpers.py # RAG utilities: search, prompt building, retrieval
-│ ├── streamlit_helpers.py # Utilities for the Streamlit frontend
+│   ├── rag_helpers.py                  # RAG pipeline helper functions
+│   ├── streamlit_helpers.py            # Streamlit UI helpers
 
-├── .gitignore
-├── README.md # Project documentation
-├── embed_chunks.py # Embedding + indexing pipeline
-├── mahabharata_rag_app.py # Streamlit interface
-├── preprocess_mahabharata.py # PDF extraction and text cleaning
-├── rag_ask.py # Command-line RAG interface
-├── requirements.txt # Python dependencies
-
-yaml
-Copy
-Edit
+├── .gitignore                          # Git ignore rules
+├── README.md                           # Project documentation (this file)
+├── embed_chunks.py                     # Script to embed text chunks into FAISS
+├── mahabharata_rag_app.py              # Streamlit web application
+├── preprocess_mahabharata.py           # PDF parsing, cleaning, and chunking logic
+├── rag_ask.py                          # CLI script to ask questions from Mahabharata
+├── requirements.txt                    # Python dependencies
+```
 
 ---
 
-## Setup Instructions
+## ⚙️ Setup Instructions
 
 ### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/yourusername/mahabharata-rag.git
 cd mahabharata-rag
-2. Install Requirements
-bash
-Copy
-Edit
+```
+
+### 2. Create a Virtual Environment
+
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
+
+### 3. Install Dependencies
+
+```bash
 pip install -r requirements.txt
-Make sure to install faiss-cpu, sentence-transformers, langchain, PyPDF2, ollama, and streamlit.
+```
 
-3. Configure Environment (Optional)
-Create a .env file if needed:
+### 4. Configure Environment (Optional)
 
-ini
-Copy
-Edit
-PDF_PATH=data/Mahabharata_Unabridged.pdf
-CHUNKS_PATH=data/maha_chunks.json
-CHUNKS_METADATA_PATH=data/maha_chunks_metadata.json
-FAISS_INDEX_PATH=data/maha_faiss.index
-EMBEDDING_MODEL=all-MiniLM-L6-v2
-OLLAMA_MODEL=mistral
-Pipeline Overview
-Step 1: Preprocess PDF
-Clean and extract chunks from the Mahabharata source.
+You can set custom paths via a `.env` file (optional). Default paths are hardcoded in scripts.
 
-bash
-Copy
-Edit
+---
+
+## Pipeline Workflow
+
+### Step 1: Preprocess Mahabharata PDF
+
+```bash
 python preprocess_mahabharata.py
-Step 2: Create FAISS Index
-Generate embeddings for the chunks and build a FAISS vector index.
+```
 
-bash
-Copy
-Edit
+- Loads the PDF
+- Extracts text
+- Chunks text into manageable pieces
+
+### Step 2: Embed Chunks and Build Index
+
+```bash
 python embed_chunks.py
-Step 3: Query via CLI
-Ask questions directly using your terminal.
+```
 
-bash
-Copy
-Edit
+- Converts text chunks to embeddings using Sentence Transformers
+- Stores them in FAISS index
+
+### Step 3: Query via CLI
+
+```bash
 python rag_ask.py
-Step 4: Streamlit UI (Optional)
-Launch the graphical interface to chat with the assistant.
+```
 
-bash
-Copy
-Edit
+- Accepts user question
+- Retrieves top-k similar chunks using FAISS
+- Feeds context and question to Ollama LLM via LangChain
+- Returns final response
+
+### Step 4: Launch the Streamlit UI
+
+```bash
 streamlit run mahabharata_rag_app.py
-Module Descriptions
-Module/File	Description
-preprocess_mahabharata.py	Loads PDF and splits into clean text chunks
-embed_chunks.py	Embeds chunks using sentence-transformers and stores them in FAISS
-rag_ask.py	CLI application to chat with the system
-mahabharata_rag_app.py	Streamlit frontend
-ollama_llm.py	LangChain-compatible wrapper for local LLMs via Ollama
-rag_helpers.py	Chunk retrieval, prompt creation, and response generation logic
-streamlit_helpers.py	Handles UI logic and response formatting for Streamlit
+```
 
-Future Work
-Integrate LoRA/QLoRA fine-tuning using emotional-spiritual datasets
+- Simple web-based interface
+- Uses same retrieval and generation logic as CLI
 
-Add Whisper for voice input
+---
 
-Support Hinglish and Sanskrit shloka recognition
+## Code Overview
 
-Add LangChain memory for multi-turn dialogue context
+| File | Description |
+|------|-------------|
+| `preprocess_mahabharata.py` | Reads PDF and cleans/splits text |
+| `embed_chunks.py` | Embeds text into FAISS |
+| `rag_ask.py` | Command-line interface for Q&A |
+| `mahabharata_rag_app.py` | Streamlit-based UI |
+| `ollama_llm.py` | Local LLM (Mistral) wrapper via Ollama |
+| `rag_helpers.py` | Core logic for retrieval and prompt building |
+| `streamlit_helpers.py` | UI formatting and streamlit helpers |
 
-Fine-tune Mistral or TinyLlama to respond in philosophical tone
+---
+
+##  Roadmap
+
+- Add memory-based chat experience
+- Voice input via Whisper
+- Multilingual support (Sanskrit, Hindi)
+- LoRA/QLoRA fine-tuning pipeline
+
+---
 
