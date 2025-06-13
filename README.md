@@ -128,153 +128,97 @@ streamlit run mahabharata_rag_app.py
 
 ## 📖 Project Overview
 
-This project started out with a simple question —  
-**"Can I make a chatbot that answers like Krishna?"**  
+This project began with a powerful question —  
+**"Can I make a chatbot that answers like Krishna?"**
 
-Not just a typical Q&A bot, but a **spiritual guru** that gives:
-- Context-aware answers
-- Philosophically rich insights
+Not just a typical Q&A bot, but a **spiritual guru** that offers:
+- Context-aware answers  
+- Philosophically rich insights  
 - Emotionally intelligent guidance  
-All rooted in the **wisdom of the Mahabharata**, **Bhagavad Gita**, and classical Indian scriptures.
 
-What followed was an intense, incredibly rewarding journey into **LLMs**, **Retrieval-Augmented Generation (RAG)**, **fine-tuning**, **embeddings**, **vector databases** — and more importantly, **my own growth as an AI engineer and spiritual thinker**.
+Rooted deeply in the wisdom of the **Mahabharata**, **Bhagavad Gita**, and classical Indian scriptures.
+
+What started as a technical challenge quickly evolved into a journey — one that blended AI engineering with spiritual exploration.
 
 ---
 
 ## 🔧 Phase 1: Understanding the Soul of the Project
 
-Before writing a single line of code, I clarified the **purpose**:
+Before diving into code, I clarified the **purpose** of this assistant:
 
-> 🕉️ This assistant wasn't just about answering — it had to become a **spiritual companion**.
+> 🕉️ It wasn’t just about answering questions — it had to be a guide, a companion, a modern Krishna.
 
-### ✨ Key Design Principles
+### ✨ Key Design Goals
 
-- **Reflect spiritual empathy**  
-  E.g., comforting users when they’re lonely, confused, or in pain.
-
-- **Use the Mahabharata and Gita as the single source of truth**  
-  No generic GPT-style responses allowed.
-
-- **Maintain a mytho-philosophical tone**  
-  Speak like how Krishna would counsel Arjuna — wise, calm, poetic.
-
-- **Multilingual Capabilities**  
-  Handle English, Sanskrit, or even Hinglish.
-
-### 💡 Core Stack Needed
-
-- **🧠 RAG** to ground answers in scripture
-- **🛠️ QLoRA Fine-tuning** to give the LLM a "Krishna-like" voice
-- **🧵 Conversational Memory** for genuine spiritual dialogue
+- **Spiritual empathy** — comfort users when they feel lost or confused  
+- **Scripture-grounded answers** — draw only from Gita and Mahabharata, not generic AI responses  
+- **Consistent tone** — mytho-philosophical, calm, and reflective  
+- **Multilingual readiness** — able to understand English, Sanskrit, Hinglish  
 
 ---
 
 ## 📂 Phase 2: Building the RAG Pipeline
 
-### 🧱 Stack Used
+The assistant was built on a **Retrieval-Augmented Generation (RAG)** architecture with conversational memory.
 
-- **LangChain** — memory + orchestration  
-- **FAISS** — fast vector search  
-- **SentenceTransformers** — for embeddings  
-- **Ollama** — to run local models like Mistral or TinyLlama
+### 🧱 Tech Stack
 
-### 🛠️ Scripts Developed
+- **LangChain** — for orchestration and memory  
+- **FAISS** — for efficient vector similarity search  
+- **SentenceTransformers** — to generate high-quality embeddings  
+- **Ollama** — to run local LLMs like Mistral or TinyLlama
 
-- `preprocess_mahabharata.py` — Clean and chunk massive Mahabharata PDFs  
-- `embed_chunks.py` — Embed chunks and index them into FAISS  
-- `rag_ask.py` — Retrieve context + generate spiritual responses
+### 🛠️ Key Components
+
+- `preprocess_mahabharata.py` — Cleans and chunks the Mahabharata PDF  
+- `embed_chunks.py` — Embeds chunks and stores them in FAISS  
+- `rag_ask.py` — Handles user queries with context-aware generation
 
 ### 📚 What I Learned
 
-- How to **chunk large texts** while preserving coherence
-- Why **embedding model choice** matters for abstract/philosophical data
-- Crafting **system prompts** that respect sacred text tones
+- How to **chunk large philosophical texts** while maintaining coherence  
+- Importance of **embedding model choice** for nuanced scripture  
+- How to build **system prompts** that preserve tone and emotional depth
 
 ---
 
-## 🔄 Phase 3: Interactivity and Emotional Intelligence
+## 🔄 Phase 3: Interactivity and Emotional Connection
 
-I wanted the bot to speak gently — like:
+I wanted the bot to feel personal — like:
 
 > “Don’t be afraid, I’m here with you. Krishna once told Arjuna...”
 
-### 🤖 UX Features
+### 🤖 Features
 
-- **Emotion-aware prompts** with spiritual tone
-- **LangChain’s ConversationBufferMemory** for ongoing dialogue
-- **Streamlit UI** for lightweight, interactive frontend
+- Emotionally-aware response templates  
+- **LangChain’s ConversationBufferMemory** to keep dialogue flowing  
+- A clean and simple **Streamlit UI** for user interaction
 
 ### 🧘 What I Learned
 
-- Tone is everything in LLM prompting
-- How to **blend factual scripture** with **creative generation**
-- Why **memory systems** make the chatbot feel human
+- Why **tone and emotional intelligence** are crucial in LLM prompting  
+- How to balance **retrieved facts** with **creative generation**  
+- The power of **session memory** in making bots feel truly alive
 
 ---
 
-## 🔬 Phase 4: Fine-Tuning with QLoRA
-
-This was the **hardest phase**, especially with:
-
-> ⚙️ **RTX 3050 (4GB VRAM)**
-
-### ⚒️ Solution Strategy
-
-- Used **TinyLlama** and **Mistral-7B-Instruct** (as hardware allowed)
-- Used **QLoRA + PEFT + bitsandbytes** for low-resource fine-tuning
-- Built my **custom dataset** from scratch
-
-### 🧾 Custom Dataset Highlights
-
-- 100s of emotionally intelligent, spiritually grounded Q&A pairs
-- Every response started with **“Krishna said...”** or **“My friend, listen to this story...”**
-- Manually curated to reflect **compassion, wisdom, and relevance**
-
-### 🎯 What I Learned
-
-- Even **100–200 examples**, if crafted well, can **tune the soul of an LLM**
-- The difference between **instruction-following** and **vibe-following**
-- The joy of watching a model evolve into a **real virtual guru**
-
----
-
-## 💡 Key Learnings
+## 💡 Key Takeaways
 
 ### 👨‍💻 Technical
 
-- Deep understanding of **RAG**: chunking, embeddings, retrieval, prompt chaining
-- Efficient fine-tuning with **QLoRA** under **VRAM constraints**
-- LangChain memory, chaining, and prompt tools
-- Clean, modular, and real-world ready LLM pipelines
+- End-to-end understanding of **RAG systems**: chunking, embedding, vector DBs, prompt design  
+- Building modular, efficient, real-world pipelines with **LangChain + FAISS**  
+- Practical use of conversational memory in a retrieval setting
 
 ### 🧠 Philosophical
 
-- **AI without intention is just automation.** What matters is *what you make it say.*
-- There’s beauty in **digitizing dharma** and making ancient wisdom accessible.
-- The **future of chatbots isn’t speed — it’s soul.**
+- **AI without intention is just automation** — what you build it to say defines its value  
+- Blending **dharmic wisdom** with modern AI makes timeless knowledge more accessible  
+- The **soul of a chatbot** lies not in speed or accuracy — but in how it makes people feel
 
 ---
 
-## 🚀 What’s Next?
-
-- 🔊 **Speech-to-text** input for hands-free interaction  
-- 📤 Let users **upload their life problems** and get scriptural-based responses  
-- 🪷 Open-source the fine-tuned model on Hugging Face  
-- 🌐 Launch a full-fledged **spiritual guidance web app** for the world  
-
----
-
-## 🙏 Final Thoughts
-
-If you're considering building something that **blends history, AI, and meaning** —  
-I **highly recommend it**.
-
-This wasn’t just an NLP project.  
-It was a **yajna** — a sacred offering of effort, devotion, and learning.
-
----
-
-> *"In the midst of code, I found the Gita. In the silence of fine-tuning, I heard Krishna."*
+> *"In the midst of code, I found the Gita. In the silence of retrieval, I heard Krishna."*
 
 ---
 
